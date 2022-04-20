@@ -19,9 +19,9 @@ def checkParkingSpace(imgPro):
         x, y = pos
 
         imgCrop = imgPro[y:y + height, x:x + width]
+
         # cv2.imshow(str(x * y), imgCrop)
         count = cv2.countNonZero(imgCrop)
-
         if count <= 32:
             color = (0, 255, 0)
             thickness = 5
@@ -34,8 +34,7 @@ def checkParkingSpace(imgPro):
         cvzone.putTextRect(img, str(count), (x, y + height - 3), scale=0.8,
                            thickness=2, offset=0, colorR=color)
 
-    # cvzone.putTextRect(img, f'Free: {spaceCounter}/{len(posList)}', (100, 50), scale=1,
-    #                   thickness=5, offset=20, colorR=(0, 200, 0))
+    print(f'Free: {spaceCounter}/{len(posList)}')
 
 
 while True:
@@ -52,7 +51,7 @@ while True:
     imgDilate = cv2.dilate(imgMedian, kernel, iterations=1)
 
     checkParkingSpace(imgDilate)
-    cv2.imshow("Image", img)
+
     # cv2.imshow("ImageBlur", imgBlur)
     # cv2.imshow("ImageThres", imgMedian)
-    cv2.waitKey(10)
+    cv2.waitKey(10000)
